@@ -11,7 +11,7 @@ class ContinuousDeliveryStack(core.Stack):
 
     def __init__(self, scope: core.Construct, id: str, deploy_stack: core.Stack, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
-        
+
         # ========================================
         # CodePipeline
         # ========================================
@@ -20,17 +20,17 @@ class ContinuousDeliveryStack(core.Stack):
             id='sample_pipeline',
             pipeline_name='sample_pipeline_name',
         )
-        
-        
+
+
         # ============ source stage ============
         source_output = aws_codepipeline.Artifact('source_output')
 
         # Change to your setting.
-        owner = 'joe-king-sh'
+        owner = 'titanjer'
         repo = 'aws-cdk-fargate-batch'
         branch = 'master'
         oauth_token = get_parameters('GITHUB_OAUTH_TOKEN')
-        
+
         # Create source collect stage.
         source_action = aws_codepipeline_actions.GitHubSourceAction(
             action_name='source_collect_action_from_github',
@@ -63,7 +63,7 @@ class ContinuousDeliveryStack(core.Stack):
                 actions=['ssm:GetParameters']
             )
         )
-        
+
         # Add build stage to my pipeline.
         build_output = aws_codepipeline.Artifact('build_output')
         codepipeline.add_stage(
@@ -99,7 +99,7 @@ def get_parameters(param_key):
     """
     Get parameter encrypted from parameter store.
     """
-    ssm = boto3.client('ssm', region_name='ap-northeast-1')
+    ssm = boto3.client('ssm', region_name='us-west-2')
     response = ssm.get_parameters(
         Names=[
             param_key,
