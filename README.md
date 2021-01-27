@@ -1,5 +1,7 @@
 # aws-cdk-fargate-batch
-Repository for building python batches running on Fargate with AWS CDK.
+Repository for building python batches running on Fargate with AWS CDK. 
+
+Forked from [joe-king-sh/aws-cdk-fargate-batch](https://github.com/joe-king-sh/aws-cdk-fargate-batch)
 
 ## Getting Started
 
